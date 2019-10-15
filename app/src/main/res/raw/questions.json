@@ -1,0 +1,42 @@
+[
+  {
+    "question": "Labrador retrievers were originally bred to retrieve fishing nets.",
+    "answer": true
+  },
+  {
+    "question": "Lightning never strikes the same place twice.",
+    "answer": false
+  },
+  {
+    "question": "As a human body grows larger, its number of bones gets smaller. ",
+    "answer": true
+  },
+  {
+    "question": "Coffee originated in Brazil.",
+    "answer": false
+  },
+  {
+    "question": "The \"dark side of the Moon\", is the same as the \"far side of the Moon.\"",
+    "answer": false
+  },
+  {
+    "question": "Franklin Roosevelt is one of the presidents depicted on Mount Rushmore.",
+    "answer": false
+  },
+  {
+    "question": "The Red Sea gets its name from a slaughter that occurred there during biblical times.",
+    "answer": false
+  },
+  {
+    "question": "Bangalore is the \"Silicon Valley of India.\"",
+    "answer": true
+  },
+  {
+    "question": "Warts can be caused by touching certain animals, especially toads.",
+    "answer": false
+  },
+  {
+    "question": "Ancient Olympic athletes competed nude.",
+    "answer": true
+  }
+]

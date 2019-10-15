@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">QuizApp</string>
+    <string name="false">FALSE</string>
+    <string name="true">TRUE</string>
+    <string name="falseButton">FALSE</string>
+    <string name="trueButton">TRUE</string>
+</resources>
