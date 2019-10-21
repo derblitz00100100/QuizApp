@@ -2,20 +2,26 @@ package com.example.quizapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String TAG = MainActivity.class.getSimpleName();
     private int currentQuestion = 0;
-    private List<Question> questions;
+    private List<Question> questionsList;
     private int score;
     private Button trueButton;
     private Button falseButton;
@@ -26,24 +32,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        InputStream JsonFileInputStream = getResources().openRawResource(R.raw.questions);
-        String testText = readTextFile(JsonFileInputStream);
-
-        questionText.setText(questions.get(currentQuestion).getQuestion());
-
         wireWidgets();
         setListeners();
+
+        InputStream JsonFileInputStream = getResources().openRawResource(R.raw.questions);
+        String jsonString = readTextFile(JsonFileInputStream);
+        Gson gson = new Gson();
+        Question[] questions =  gson.fromJson(jsonString, Question[].class);
+        questionsList = Arrays.asList(questions);
+        Log.d(TAG, "onCreate: " + questionsList.toString());
+        questionText.setText(questionsList.get(currentQuestion).getQuestion());
     }
 
     private void setListeners() {
         trueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (checkAnswer(true)) {
+                if (checkAnswer(true) && hasMoreQuestions()) {
                     score++;
                     nextQuestion();
                 }
                 else {
+                    if (hasMoreQuestions())
                     nextQuestion();
                 }
 
@@ -53,7 +63,14 @@ public class MainActivity extends AppCompatActivity {
         falseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                if (checkAnswer(false) && hasMoreQuestions()) {
+                    score++;
+                    nextQuestion();
+                }
+                else {
+                    if (hasMoreQuestions())
+                    nextQuestion();
+                }
             }
         });
     }
@@ -83,19 +100,20 @@ public class MainActivity extends AppCompatActivity {
     // reading textfile from res folder, https://stackoverflow.com/questions/15912825/how-to-read-file-from-res-raw-by-name
 
     public boolean checkAnswer(boolean selectedAnswer) {
-        return questions.get(currentQuestion).getAnswer() == selectedAnswer;
+        return questionsList.get(currentQuestion).getAnswer() == selectedAnswer;
     }
 
     public boolean hasMoreQuestions() {
-        if (questions.size() - 1 > currentQuestion)
+        if (questionsList.size() - 1 > currentQuestion)
             return true;
         else
             return false;
     }
 
-    public Question nextQuestion() {
+    public void nextQuestion() {
         currentQuestion++;
-        return questions.get(currentQuestion);
+        questionText.setText(questionsList.get(currentQuestion).getQuestion());
     }
+
 }
 
