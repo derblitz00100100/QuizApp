@@ -2,4 +2,6 @@
     <string name="app_name">QuizApp</string>
     <string name="false_Button">FALSE</string>
     <string name="true_button">TRUE</string>
+    <string name="restart">RESTART</string>
+    <string name="score">Score:</string>
 </resources>

@@ -3,4 +3,6 @@
     <string name="app_name">QuizApp</string>
     <string name="false_Button">FAUX</string>
     <string name="true_button">VRAI</string>
+    <string name="restart">REDEMARRER</string>
+    <string name="score">" But: "</string>
 </resources>

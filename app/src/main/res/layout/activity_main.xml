@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textView_main_question"
+        android:id="@+id/textView_main_score"
         android:layout_width="wrap_content"
         android:layout_height="60dp"
         android:text="Hello World!"
@@ -19,7 +19,7 @@
         app:layout_constraintVertical_bias="0.386" />
 
     <Button
-        android:id="@+id/button_main_true"
+        android:id="@+id/button_main_restart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -39,7 +39,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/button_main_true"
+        app:layout_constraintStart_toEndOf="@+id/button_main_restart"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

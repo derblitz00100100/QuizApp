@@ -3,6 +3,7 @@ package com.example.quizapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,17 +16,18 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final String TAG = MainActivity.class.getSimpleName();
-    private int currentQuestion = 0;
-    private List<Question> questionsList;
-    private int score;
+    private Quiz quiz;
     private Button trueButton;
     private Button falseButton;
     private TextView questionText;
+
+    public static final String EXTRA_SCORE = "score";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,46 +41,56 @@ public class MainActivity extends AppCompatActivity {
         String jsonString = readTextFile(JsonFileInputStream);
         Gson gson = new Gson();
         Question[] questions =  gson.fromJson(jsonString, Question[].class);
-        questionsList = Arrays.asList(questions);
-        Log.d(TAG, "onCreate: " + questionsList.toString());
-        questionText.setText(questionsList.get(currentQuestion).getQuestion());
+        quiz = new Quiz(Arrays.asList(questions));
+        Log.d(TAG, "onCreate: " + quiz.toString());
+        questionText.setText(quiz.getQuestions().get(quiz.getCurrentQuestion()).getQuestion());
+
     }
 
     private void setListeners() {
         trueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (checkAnswer(true) && hasMoreQuestions()) {
-                    score++;
-                    nextQuestion();
+                if (quiz.checkAnswer(true) && quiz.hasMoreQuestions()) {
+                    quiz.setScore(quiz.getScore() + 1);
+                    questionText.setText(quiz.nextQuestion());
+                }
+                else if (quiz.hasMoreQuestions()) {
+                        questionText.setText(quiz.nextQuestion());
                 }
                 else {
-                    if (hasMoreQuestions())
-                    nextQuestion();
+                    Intent targetIntent = new Intent(MainActivity.this, ScoreActivity.class);
+                    targetIntent.putExtra(EXTRA_SCORE, quiz.getScore());
+                    startActivity(targetIntent);
+                    finish();
                 }
-
             }
         });
 
         falseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (checkAnswer(false) && hasMoreQuestions()) {
-                    score++;
-                    nextQuestion();
+                if (quiz.checkAnswer(false) && quiz.hasMoreQuestions()) {
+                    quiz.setScore(quiz.getScore() + 1);
+                    questionText.setText(quiz.nextQuestion());
+                }
+                else if (quiz.hasMoreQuestions()){
+                    questionText.setText(quiz.nextQuestion());
                 }
                 else {
-                    if (hasMoreQuestions())
-                    nextQuestion();
+                    Intent targetIntent = new Intent(MainActivity.this, ScoreActivity.class);
+                    targetIntent.putExtra(EXTRA_SCORE, quiz.getScore());
+                    startActivity(targetIntent);
+                    finish();
                 }
             }
         });
     }
 
     private void wireWidgets() {
-        trueButton = findViewById(R.id.button_main_true);
+        trueButton = findViewById(R.id.button_main_restart);
         falseButton = findViewById(R.id.button_main_false);
-        questionText = findViewById(R.id.textView_main_question);
+        questionText = findViewById(R.id.textView_main_score);
     }
 
     public String readTextFile(InputStream inputStream) {
@@ -98,22 +110,6 @@ public class MainActivity extends AppCompatActivity {
         return outputStream.toString();
     }
     // reading textfile from res folder, https://stackoverflow.com/questions/15912825/how-to-read-file-from-res-raw-by-name
-
-    public boolean checkAnswer(boolean selectedAnswer) {
-        return questionsList.get(currentQuestion).getAnswer() == selectedAnswer;
-    }
-
-    public boolean hasMoreQuestions() {
-        if (questionsList.size() - 1 > currentQuestion)
-            return true;
-        else
-            return false;
-    }
-
-    public void nextQuestion() {
-        currentQuestion++;
-        questionText.setText(questionsList.get(currentQuestion).getQuestion());
-    }
 
 }
 
