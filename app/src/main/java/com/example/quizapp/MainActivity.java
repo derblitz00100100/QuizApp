@@ -51,14 +51,13 @@ public class MainActivity extends AppCompatActivity {
         trueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (quiz.checkAnswer(true) && quiz.hasMoreQuestions()) {
+                if (quiz.checkAnswer(true)) {
                     quiz.setScore(quiz.getScore() + 1);
-                    questionText.setText(quiz.nextQuestion());
                 }
-                else if (quiz.hasMoreQuestions()) {
+                if (quiz.hasMoreQuestions()) {
                         questionText.setText(quiz.nextQuestion());
                 }
-                else {
+                else if (!quiz.hasMoreQuestions()){
                     Intent targetIntent = new Intent(MainActivity.this, ScoreActivity.class);
                     targetIntent.putExtra(EXTRA_SCORE, quiz.getScore());
                     startActivity(targetIntent);
@@ -70,14 +69,13 @@ public class MainActivity extends AppCompatActivity {
         falseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (quiz.checkAnswer(false) && quiz.hasMoreQuestions()) {
+                if (quiz.checkAnswer(false)) {
                     quiz.setScore(quiz.getScore() + 1);
+                }
+                if (quiz.hasMoreQuestions()){
                     questionText.setText(quiz.nextQuestion());
                 }
-                else if (quiz.hasMoreQuestions()){
-                    questionText.setText(quiz.nextQuestion());
-                }
-                else {
+                else if (!quiz.hasMoreQuestions()){
                     Intent targetIntent = new Intent(MainActivity.this, ScoreActivity.class);
                     targetIntent.putExtra(EXTRA_SCORE, quiz.getScore());
                     startActivity(targetIntent);
