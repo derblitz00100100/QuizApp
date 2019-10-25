@@ -1,0 +1,42 @@
+[
+  {
+    "question": "Les récupérateurs de Labrador ont été élevés à l'origine pour récupérer des filets de pêche.",
+    "answer": true
+  },
+  {
+    "question": "La foudre ne frappe jamais deux fois au même endroit.",
+    "answer": false
+  },
+  {
+    "question": "À mesure qu'un corps humain grossit, son nombre d'os diminue.",
+    "answer": true
+  },
+  {
+    "question": "Le café est originaire du Brésil.",
+    "answer": false
+  },
+  {
+    "question": "\nLe \"côté obscur de la Lune\" est identique à \"lointain de la Lune\".",
+    "answer": false
+  },
+  {
+    "question": "Franklin Roosevelt is one of the presidents depicted on Mount Rushmore.",
+    "answer": false
+  },
+  {
+    "question": "Franklin Roosevelt est l’un des présidents représentés sur le mont Rushmore.",
+    "answer": false
+  },
+  {
+    "question": "Bangalore est la \"Silicon Valley de l'Inde\".",
+    "answer": true
+  },
+  {
+    "question": "Les verrues peuvent être causées en touchant certains animaux, en particulier les crapauds.",
+    "answer": false
+  },
+  {
+    "question": "Les anciens athlètes olympiques se sont affrontés nus.",
+    "answer": true
+  }
+]

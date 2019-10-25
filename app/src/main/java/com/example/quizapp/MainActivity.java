@@ -86,9 +86,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void wireWidgets() {
-        trueButton = findViewById(R.id.button_main_restart);
+        trueButton = findViewById(R.id.button_main_true);
         falseButton = findViewById(R.id.button_main_false);
-        questionText = findViewById(R.id.textView_main_score);
+        questionText = findViewById(R.id.textView_main_question);
     }
 
     public String readTextFile(InputStream inputStream) {
